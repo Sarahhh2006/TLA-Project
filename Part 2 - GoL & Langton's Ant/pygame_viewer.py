@@ -33,7 +33,7 @@ def grid_to_surface(grid, cell_scale=1, alive_color=(255, 255, 255), dead_color=
     return surface
 
 
-def run_pygame_life(life, cell_scale=1, fps=0.1, viewport=None, max_frames=None, title="Game of Life"):
+def run_pygame_life(life, cell_scale=400, fps=1, viewport=None, max_frames=None, title="Game of Life"):
     """Render a Game of Life simulation in a pygame window."""
     pygame.init()
     cells = life.getStates()

@@ -119,7 +119,6 @@ def main():
     start_row = args.row if args.row is not None else args.size // 2
     start_col = args.col if args.col is not None else args.size // 2
     rules = MULTI_COLOR_RULES if args.multi_color else DEFAULT_RULES
-
     ant = LangtonsAnt(args.size, (start_row, start_col), rules)
     run_visualizer(
         ant,
