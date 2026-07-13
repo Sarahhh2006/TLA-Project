@@ -15,8 +15,8 @@ def main():
     life = conway.GameOfLife(N)
     # life.insertBlinker((0,0))
     # life.insertGlider((0,0))
-    # life.insertGliderGun((0,0))
-    # life.insertFromFile("dragon spaceship.cells", (0,100))
+    # life.insertGliderGun((100,100))
+    # life.insertFromFile("dragon spaceship.cells", (100,100))
     # life.insertFromFile("ak94 gun.cells", (100,100))
     # life.insertFromFile("vacuumgun gun.cells", (100,100))
     # life.insertFromFile("stargate oscillator.cells", (100,100))
@@ -28,8 +28,8 @@ def main():
     run_pygame_life(
         life,
         cell_scale=CELL_SCALE,
-        fps=20,
-        max_frames=24,
+        fps=1000,
+        max_frames=100,
         viewport=VIEWPORT,
         title="Game of Life - Large Gun",
     )

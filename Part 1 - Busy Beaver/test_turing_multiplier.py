@@ -4,12 +4,6 @@ from test_turing_machine_example1 import print_states
 
 #create the Turing machine
 transitions = {
-        # TODO: Part II b) - Write your transition rules here as entries to a Python dictionary
-        # For example, the key will be a pair (state, character)
-        # The value will be the triple (next state, character to write, move head L or R)
-        # such as ('q0', '1'): ('q1', '0', 'R'), which says if current state is q0 and 1 encountered
-        # then transition to state q1, write a 0 and move head right.
-        
         ('q0','1'):('qs','y','R'),
         ('q0','0'):('q10','0','R'),
         ('qs','1'):('qs','y','R'),

@@ -14,7 +14,7 @@ This part consists of three main sections:
 
 ## Project Components
 
-### File Structure
+### File Structureَ
 
 ```
 Part 1 - Busy Beaver/

@@ -18,7 +18,20 @@ DEFAULT_RULES = {
     0: (1, "R"),
     1: (0, "L"),
 }
-
+TRIANGLE_RULES = {
+    0: (1, "R"),
+    1: (2, "R"),
+    2: (3, "L"),
+    3: (4, "L"),
+    4: (5, "L"),
+    5: (6, "R"),
+    6: (7, "L"),
+    7: (8, "L"),
+    8: (9, "L"),
+    9: (10, "R"),
+    10: (11, "R"),
+    11: (0, "R"),
+}
 MULTI_COLOR_RULES = {
     0: (1, "R"),
     1: (2, "L"),
@@ -88,6 +101,7 @@ def run_visualizer(ant, cell_scale=6, fps=60, max_steps=None, title="Langton's A
         ant.step()
         grid = ant.get_states()
         steps += 1
+        print(steps)
         if max_steps is not None and steps >= max_steps:
             finished = True
 
@@ -110,6 +124,10 @@ def parse_args():
         action="store_true",
         help="Use a simple four-color rule set instead of the default two-color rule set",
     )
+    parser.add_argument(
+    "--triangle",
+    action="store_true",
+    help="Use the 12-color rule for symmetric triangle pattern",)
     return parser.parse_args()
 
 
@@ -118,7 +136,13 @@ def main():
     args = parse_args()
     start_row = args.row if args.row is not None else args.size // 2
     start_col = args.col if args.col is not None else args.size // 2
-    rules = MULTI_COLOR_RULES if args.multi_color else DEFAULT_RULES
+    if args.triangle:
+        rules = TRIANGLE_RULES
+    elif args.multi_color:
+        rules = MULTI_COLOR_RULES
+    else:
+        rules = DEFAULT_RULES
+
     ant = LangtonsAnt(args.size, (start_row, start_col), rules)
     run_visualizer(
         ant,

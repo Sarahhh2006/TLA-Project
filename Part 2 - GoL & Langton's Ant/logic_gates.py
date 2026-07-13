@@ -5,71 +5,131 @@ Glider-based Logic Gates Student Template Module.
 """
 import numpy as np
 from conway import GameOfLife
+from pygame_viewer import run_pygame_life
+
+CELL_SCALE = 10
+
+
 
 
 class GliderLogicGates:
-    """
-    TODO: [Extension - Logic Gates]
-    Instruct the student to:
-    1. Initialize a grid and precisely place "Glider" streams (signals represented by gliders)
-       such that their collision simulates:
-       - An AND gate (produces a specific output pattern only when both inputs A and B are active).
-       - A NOT gate (produces an output signal/glider only when input A is inactive).
-    2. Prove the Turing completeness of Conway's Game of Life by demonstrating these logic gates.
-    """
 
-    def setup_and_gate(self, grid_size=35, input_a_present=False, input_b_present=False):
-        """
-        Set up the Game of Life grid for an AND gate.
-        
-        Args:
-            grid_size (int): Size of the simulation grid.
-            input_a_present (bool): If True, place glider for Input A.
-            input_b_present (bool): If True, place glider for Input B.
-            
-        Returns:
-            GameOfLife: Initialized GameOfLife object.
-        """
-        # Student TODO: Setup glider(s) on the grid
-        pass
 
-    def setup_not_gate(self, grid_size=35, input_a_present=False):
-        """
-        Set up the Game of Life grid for a NOT gate.
+    def setup_and_gate(self, input_a_present=False, input_b_present=False, grid_size=35):
+        N=grid_size
+        life = GameOfLife(N)
         
-        Args:
-            grid_size (int): Size of the simulation grid.
-            input_a_present (bool): If True, place glider for Input A.
-            
-        Returns:
-            GameOfLife: Initialized GameOfLife object.
-        """
-        # Student TODO: Setup control glider and input glider(s)
-        pass
+        if input_a_present:
+            r, c = 4, 2
+            life.grid[r,     c + 1] = life.aliveValue
+            life.grid[r + 1, c + 2] = life.aliveValue
+            life.grid[r + 2, c]     = life.aliveValue
+            life.grid[r + 2, c + 1] = life.aliveValue
+            life.grid[r + 2, c + 2] = life.aliveValue
+
+        if input_b_present:  
+            r, c = 1, 23
+            life.grid[r,     c + 1] = life.aliveValue
+            life.grid[r + 1, c]     = life.aliveValue
+            life.grid[r + 2, c]     = life.aliveValue
+            life.grid[r + 2, c + 1] = life.aliveValue
+            life.grid[r + 2, c + 2] = life.aliveValue
+        return life
+    def setup_not_gate(self, input_a_present=False, grid_size=35):
+        N=grid_size
+        life = GameOfLife(N)
+        
+        if input_a_present:
+            r, c =2, 1
+            life.grid[r,     c + 1] = life.aliveValue
+            life.grid[r + 1, c + 2] = life.aliveValue
+            life.grid[r + 2, c]     = life.aliveValue
+            life.grid[r + 2, c + 1] = life.aliveValue
+            life.grid[r + 2, c + 2] = life.aliveValue
+
+
+        r, c = 1, 23
+        life.grid[r,     c + 1] = life.aliveValue
+        life.grid[r + 1, c]     = life.aliveValue
+        life.grid[r + 2, c]     = life.aliveValue
+        life.grid[r + 2, c + 1] = life.aliveValue
+        life.grid[r + 2, c + 2] = life.aliveValue
+        return life
 
     def run_and_gate(self, input_a_present, input_b_present):
-        """
-        Run the AND gate simulation for a specific number of steps and return the output.
-        
-        Args:
-            input_a_present (bool): Input A state.
-            input_b_present (bool): Input B state.
-            
-        Returns:
-            bool: True if output is active (e.g. glider/block formed in output region), False otherwise.
-        """
-        # Student TODO: Evolve simulation and evaluate output
-        pass
+
+        gates=self.setup_and_gate( input_a_present, input_b_present)
+        # run_pygame_life(gates, cell_scale=CELL_SCALE, fps=8, max_frames=60, title="Game of Life - Glider Check")
+        for i in range(60):
+            gates.evolve()
+        if gates.grid[15,12]==1:
+            return True
+        else:
+            return False
 
     def run_not_gate(self, input_a_present):
-        """
-        Run the NOT gate simulation for a specific number of steps and return the output.
+        gates=self.setup_not_gate( input_a_present)
+        # run_pygame_life(gates, cell_scale=CELL_SCALE, fps=8, max_frames=60, title="Game of Life - Glider Check")
+        for i in range(60):
+            gates.evolve()
+        alive = np.count_nonzero(gates.grid)
+        if input_a_present:
+            return alive == 0   
+        else:
+            return alive > 0 
+
+    def setup_not_gate2(self, input_a_present=False, input_b_present=False, grid_size=35):
+        N=grid_size
+        life = GameOfLife(N)
         
-        Args:
-            input_a_present (bool): Input A state.
-            
-        Returns:
-            bool: True if output is active, False otherwise.
-        """
-        # Student TODO: Evolve simulation and evaluate output
-        pass
+        if input_a_present:
+            r, c =2, 1
+            life.grid[r,     c + 1] = life.aliveValue
+            life.grid[r + 1, c + 2] = life.aliveValue
+            life.grid[r + 2, c]     = life.aliveValue
+            life.grid[r + 2, c + 1] = life.aliveValue
+            life.grid[r + 2, c + 2] = life.aliveValue
+
+        if input_b_present:
+            r, c = 1, 23
+            life.grid[r,     c + 1] = life.aliveValue
+            life.grid[r + 1, c]     = life.aliveValue
+            life.grid[r + 2, c]     = life.aliveValue
+            life.grid[r + 2, c + 1] = life.aliveValue
+            life.grid[r + 2, c + 2] = life.aliveValue
+        return life
+
+
+    def run_not_gate2(self, input_a_present, input_b_present):
+        gates=self.setup_not_gate2( input_a_present, input_b_present)
+        #run_pygame_life(gates, cell_scale=CELL_SCALE, fps=8, max_frames=60, title="Game of Life - Glider Check")
+        for i in range(60):
+            gates.evolve()
+        alive = np.count_nonzero(gates.grid)
+        if alive==0:
+            return False  
+        else:
+            return True
+
+def main():
+    """Run the dragon spaceship demo in pygame."""
+    logic = GliderLogicGates()
+
+    print(logic.run_and_gate(True,True))
+    print(logic.run_and_gate(False,True))
+    print(logic.run_and_gate(True,False))
+    print(logic.run_and_gate(False,False))
+    print(logic.run_not_gate(True))
+    print(logic.run_not_gate(False))
+
+
+    print(logic.run_not_gate2(True,False))
+    print(logic.run_not_gate2(False,False))
+    print(logic.run_not_gate2(True,True))
+    print(logic.run_not_gate2(False,True))
+
+
+
+
+if __name__ == "__main__":
+    main()

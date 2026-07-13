@@ -157,9 +157,8 @@ def busy_beaver(n):
     tm = TuringMachine(program, 'a', 'h', '0')
     tm.set_tape_callback(tape_callback)
     tm.run()
-        # بعد از اجرای tm.run()
     count_ones = sum(1 for ch in tm.tape if ch == '1')
-    print(f"تعداد ۱های نوشته‌شده: {count_ones}")
+    print(f"count: {count_ones}")
     print("Busy beaver finished in %d steps." % tm.moves)
 
 def usage():
