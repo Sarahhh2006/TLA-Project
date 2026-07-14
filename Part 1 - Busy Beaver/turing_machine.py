@@ -57,7 +57,8 @@ class TuringMachine:
                 return True
             if action=="Reject":
                 return False
-                
+        if step>step_limit:    
+            print("Simulation stopped: Exceeded step limit of {step_limit} steps.") 
         return None
 
 
@@ -98,7 +99,8 @@ class TuringMachine:
             else:
                 norm_config=normal_config(config)
                 print(norm_config)
-            
+        if step>step_limit:    
+            raise TimeoutError(f"Simulation stopped: Exceeded step limit of {step_limit} steps.")       
 
 def colored_configg(config):
     GREEN = '\033[92m'
@@ -113,7 +115,7 @@ def colored_configg(config):
 
     for i in range(n1):
         result+=f"{GREEN} {config['left_hand_side'][i]} {RESET}"
-    result+=f"{RED} {config['symbol']} {RESET}"
+    result+=f"{RED} [{config['symbol']}] {RESET}"
 
     for j in range(n2):
         result+=f"{YELLOW} {config['right_hand_side'][j]} {RESET}"

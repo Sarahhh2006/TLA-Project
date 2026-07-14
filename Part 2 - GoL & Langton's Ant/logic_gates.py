@@ -73,60 +73,69 @@ class GliderLogicGates:
         for i in range(60):
             gates.evolve()
         alive = np.count_nonzero(gates.grid)
-        if input_a_present:
-            return alive == 0   
-        else:
-            return alive > 0 
-
-    def setup_not_gate2(self, input_a_present=False, input_b_present=False, grid_size=35):
-        N=grid_size
-        life = GameOfLife(N)
-        
-        if input_a_present:
-            r, c =2, 1
-            life.grid[r,     c + 1] = life.aliveValue
-            life.grid[r + 1, c + 2] = life.aliveValue
-            life.grid[r + 2, c]     = life.aliveValue
-            life.grid[r + 2, c + 1] = life.aliveValue
-            life.grid[r + 2, c + 2] = life.aliveValue
-
-        if input_b_present:
-            r, c = 1, 23
-            life.grid[r,     c + 1] = life.aliveValue
-            life.grid[r + 1, c]     = life.aliveValue
-            life.grid[r + 2, c]     = life.aliveValue
-            life.grid[r + 2, c + 1] = life.aliveValue
-            life.grid[r + 2, c + 2] = life.aliveValue
-        return life
-
-
-    def run_not_gate2(self, input_a_present, input_b_present):
-        gates=self.setup_not_gate2( input_a_present, input_b_present)
-        #run_pygame_life(gates, cell_scale=CELL_SCALE, fps=8, max_frames=60, title="Game of Life - Glider Check")
-        for i in range(60):
-            gates.evolve()
-        alive = np.count_nonzero(gates.grid)
-        if alive==0:
-            return False  
+        if  alive == 0  :
+            return False 
         else:
             return True
+
+    # def setup_not_gate2(self, input_a_present=False, input_b_present=False, grid_size=35):
+    #     N=grid_size
+    #     life = GameOfLife(N)
+        
+    #     if input_a_present:
+    #         r, c =2, 1
+    #         life.grid[r,     c + 1] = life.aliveValue
+    #         life.grid[r + 1, c + 2] = life.aliveValue
+    #         life.grid[r + 2, c]     = life.aliveValue
+    #         life.grid[r + 2, c + 1] = life.aliveValue
+    #         life.grid[r + 2, c + 2] = life.aliveValue
+
+    #     if input_b_present:
+    #         r, c = 1, 23
+    #         life.grid[r,     c + 1] = life.aliveValue
+    #         life.grid[r + 1, c]     = life.aliveValue
+    #         life.grid[r + 2, c]     = life.aliveValue
+    #         life.grid[r + 2, c + 1] = life.aliveValue
+    #         life.grid[r + 2, c + 2] = life.aliveValue
+    #     return life
+
+
+    # def run_not_gate2(self, input_a_present, input_b_present):
+    #     gates=self.setup_not_gate2( input_a_present, input_b_present)
+    #     #run_pygame_life(gates, cell_scale=CELL_SCALE, fps=8, max_frames=60, title="Game of Life - Glider Check")
+    #     for i in range(60):
+    #         gates.evolve()
+    #     alive = np.count_nonzero(gates.grid)
+    #     if alive==0:
+    #         return False  
+    #     else:
+    #         return True
 
 def main():
     """Run the dragon spaceship demo in pygame."""
     logic = GliderLogicGates()
 
+    print("True and True =")
     print(logic.run_and_gate(True,True))
+    print("False and True =")
     print(logic.run_and_gate(False,True))
+    print("True and False =")
     print(logic.run_and_gate(True,False))
+    print("Fasle and False =")
     print(logic.run_and_gate(False,False))
+
+    print()
+
+    print("A=True  -> A'= " )
     print(logic.run_not_gate(True))
+    print("A=False  -> A'= " )
     print(logic.run_not_gate(False))
 
 
-    print(logic.run_not_gate2(True,False))
-    print(logic.run_not_gate2(False,False))
-    print(logic.run_not_gate2(True,True))
-    print(logic.run_not_gate2(False,True))
+    # print(logic.run_not_gate2(True,False))
+    # print(logic.run_not_gate2(False,False))
+    # print(logic.run_not_gate2(True,True))
+    # print(logic.run_not_gate2(False,True))
 
 
 

@@ -17,7 +17,7 @@ def main():
 	# life.insertGlider((0,0))        # It travels diagonally across the Life grid at a speed of c/4
 	# life.insertGliderGun((0,0))     # Gosper glider gun consists of two queen bee shuttles stabilized by two blocks.
 	# life.insertFromFile("snail spaceship.cells", (0,30))
-	# life.insertFromFile("dragon spaceship.cells", (0,30))
+	life.insertFromFile("dragon spaceship.cells", (0,30))
 	# life.insertFromFile("ak94 gun.cells", (0,0))
 	# life.insertFromFile("vacuumgun gun.cells", (0,0))
 	# life.insertFromFile("vacuumgun.rle", (0,0))

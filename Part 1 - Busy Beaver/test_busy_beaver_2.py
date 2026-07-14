@@ -93,12 +93,12 @@ if __name__ == "__main__":
         print(f"count: {count_ones_4}")
         print()
         # This machine runs for 47176870 steps, writing 4098 1s, and then halts. So BB(5) is at least 47176870
-        print("BB with 5 states")
-        bbeaver5.debug(w, step_limit=10000)
-        print()
-        count_ones_5 = count_ones_from_machine(bbeaver5, w)
-        print(f"count: {count_ones_5}")
-        print()
+        # print("BB with 5 states")
+        # bbeaver5.debug(w, step_limit=10000)
+        # print()
+        # count_ones_5 = count_ones_from_machine(bbeaver5, w)
+        # print(f"count: {count_ones_5}")
+        # print()
 
 
         # به همین ترتیب برای ۳، ۴ و ۵
